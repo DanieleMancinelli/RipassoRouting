@@ -1,0 +1,9 @@
+<p>
+  <strong>Nome:</strong> {{ studente.nome }} <br>
+  <strong>Classe:</strong> {{ studente.classe }}
+  <button (click)="toggleMedia()">Mostra media voti</button>
+</p>
+
+<!-- Mostra la media solo se mostraMedia è true -->
+<p *ngIf="mostraMedia">Media voti: {{ studente.mediaVoti }}</p>
+<hr>
