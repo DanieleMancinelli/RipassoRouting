@@ -1,9 +1,16 @@
 <p>
   <strong>Nome:</strong> {{ studente.nome }} <br>
   <strong>Classe:</strong> {{ studente.classe }}
-  <button (click)="toggleMedia()">Mostra media voti</button>
+  
+
+  <!-- Bottone che alterna mostra/nascondi media -->
+  <button (click)="toggleMedia()">
+    {{ mostraMedia ? 'Nascondi media' : 'Mostra media voti' }}
+  </button>
 </p>
 
-<!-- Mostra la media solo se mostraMedia è true -->
+<!-- Condizione: mostra la media solo se mostraMedia è true -->
 <p *ngIf="mostraMedia">Media voti: {{ studente.mediaVoti }}</p>
 <hr>
+
+<a [routerLink]="['/pagina3', studente.id]">Mostra dettagli</a>

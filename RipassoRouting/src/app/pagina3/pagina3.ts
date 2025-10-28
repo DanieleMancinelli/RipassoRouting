@@ -1,19 +1,35 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // ✅ Import del CommonModule
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { StudenteComponent } from '../studente/studente';
+import { StudentiService } from '../services/studenti-service';
 
+// Questo componente mostra l'elenco degli studenti
+// e permette di eliminarne uno tramite il servizio.
 @Component({
   selector: 'app-pagina3',
   standalone: true,
-  imports: [CommonModule, StudenteComponent], // ✅ Usa CommonModule
+  imports: [CommonModule, StudenteComponent],
   templateUrl: './pagina3.html'
 })
-export class Pagina3 {
-  studenti = [
-    { id: 1, nome: 'Mario', classe: '5D', mediaVoti: 4.1 },
-    { id: 2, nome: 'Luca', classe: '5D', mediaVoti: 7.3 },
-    { id: 3, nome: 'Luigi', classe: '5D', mediaVoti: 3.9 },
-    { id: 4, nome: 'Paolo', classe: '5D', mediaVoti: 7.0 },
-    { id: 5, nome: 'Andrea', classe: '5D', mediaVoti: 5.7 },
-  ];
+export class Pagina3 implements OnInit {
+  studenti: any[] = [];
+
+  // Iniettiamo il servizio nel costruttore
+  constructor(private studentiService: StudentiService) {}
+
+  // ngOnInit viene chiamato appena Angular carica il componente
+  ngOnInit() {
+    this.aggiornaLista();
+  }
+
+  // Carica i dati dal servizio
+  aggiornaLista() {
+    this.studenti = this.studentiService.getStudenti();
+  }
+
+  // Rimuove uno studente e aggiorna la lista
+  rimuovi(id: number) {
+    this.studentiService.rimuoviStudente(id);
+    this.aggiornaLista();
+  }
 }

@@ -1,5 +1,10 @@
 <h2>Elenco Studenti</h2>
 
+<!-- Ciclo *ngFor per visualizzare ogni studente -->
 <div *ngFor="let s of studenti">
+  <!-- Passiamo lo studente al componente figlio -->
   <app-studente [studente]="s"></app-studente>
+
+  <!-- Bottone per rimuovere lo studente -->
+  <button (click)="rimuovi(s.id)">Rimuovi</button>
 </div>
